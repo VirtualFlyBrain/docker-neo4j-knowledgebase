@@ -7,3 +7,10 @@ ADD http://data.virtualflybrain.org/archive/KBbackup.tar.gz /opt/VFB/backup/
 RUN cd /opt/VFB/backup/ && tar -xzvf /opt/VFB/backup/KBbackup.tar.gz && \
 chmod -R 777 /opt/VFB && \
 /var/lib/neo4j/bin/neo4j-admin restore --from=/opt/VFB/backup/graph.db-KBbackup --force=true
+
+COPY lockDB.sh /lockDB.sh
+
+RUN chmod +x /lockDB.sh
+
+ENTRYPOINT ["/lockDB.sh"]
+CMD ["neo4j"]
