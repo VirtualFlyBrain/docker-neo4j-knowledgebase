@@ -1,5 +1,5 @@
-#!/bin/sh
+#!/bin/bash
 
 sleep 10m && sed -i s/read_only=false/read_only=true/ ${NEOSERCONF} &
 
-/docker-entrypoint.sh
+/bin/sh /docker-entrypoint.sh
