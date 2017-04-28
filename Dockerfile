@@ -4,6 +4,8 @@ ENV NEOREADONLY=true
 
 RUN mkdir -p /opt/VFB/backup
 
+RUN apk add tar
+
 COPY loadKB.sh /opt/VFB/
 
 RUN chmod +x /opt/VFB/loadKB.sh
