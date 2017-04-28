@@ -2,15 +2,11 @@ FROM virtualflybrain/docker-vfb-neo4j:enterprise
 
 RUN mkdir -p /opt/VFB/backup
 
-ADD http://data.virtualflybrain.org/archive/KBbackup.tar.gz /opt/VFB/backup/
+ADD http://data.virtualflybrain.org/archive/VFB-KB.tar.gz /opt/VFB/backup/
 
-RUN cd /opt/VFB/backup/ && tar -xzvf /opt/VFB/backup/KBbackup.tar.gz && \
+RUN /var/lib/neo4j/bin/neo4j start && sleep 1m && \ 
+cd /opt/VFB/backup/ && tar -xzvf /opt/VFB/backup/VFB-KB.tar.gz && \
 chmod -R 777 /opt/VFB && \
-/var/lib/neo4j/bin/neo4j-admin restore --from=/opt/VFB/backup/graph.db-KBbackup --force=true
+/var/lib/neo4j/bin/neo4j-admin restore --from=/opt/VFB/backup/VFB-KB.db --force=true
 
-COPY lockDB.sh /lockDB.sh
-
-RUN chmod +x /lockDB.sh
-
-ENTRYPOINT ["/lockDB.sh"]
-CMD ["neo4j"]
+RUN sed -i s/read_only=false/read_only=true/ ${NEOSERCONF} 
