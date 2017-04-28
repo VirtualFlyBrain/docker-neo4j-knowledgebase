@@ -13,4 +13,4 @@ rm -rf /opt/VFB/backup
 sed -i s/read_only=false/read_only=${NEOREADONLY}/ ${NEOSERCONF} 
 
 # start Neo4j service
-exec /docker-entrypoint.sh "$@"
+exec bin/neo4j console
