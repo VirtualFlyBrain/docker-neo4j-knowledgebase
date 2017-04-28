@@ -4,7 +4,7 @@ ENV NEOREADONLY=true
 
 RUN mkdir -p /opt/VFB/backup
 
-RUN apk update && apk add tar && apk add gzip
+RUN apk update && apk add tar gzip curl
 
 COPY loadKB.sh /opt/VFB/
 
