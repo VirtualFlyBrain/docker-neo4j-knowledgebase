@@ -13,4 +13,6 @@ COPY loadKB.sh /opt/VFB/
 
 RUN chmod +x /opt/VFB/loadKB.sh
 
+ADD http://data.virtualflybrain.org/archive/VFB-KB.tar.gz /opt/VFB/backup/VFB-KB.tar.gz
+
 ENTRYPOINT ["/opt/VFB/loadKB.sh"]
