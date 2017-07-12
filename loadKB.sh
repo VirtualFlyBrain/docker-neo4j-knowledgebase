@@ -4,6 +4,7 @@ if [ ! -d /data/databases/graph.db ]; then
   if [ ! -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from archive backup'
     if [ -f /opt/VFB/backup/VFB-KB.tar.gz ]; then
+      cd /opt/VFB/backup/
       tar -xzvf VFB-KB.tar.gz
       mv *.db* /backup/KBW-RESTORE.db
     fi
