@@ -10,6 +10,7 @@ if [ ! -d /data/databases/graph.db ]; then
     mkdir -p /backup/KBW-RESTORE.db/
     find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/KBW-RESTORE.db/ +
     rm -rf /opt/VFB/backup/*
+    cd -
   fi
 fi
 
