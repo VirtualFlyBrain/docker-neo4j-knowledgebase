@@ -4,6 +4,7 @@ ENV NEOREADONLY=true
 
 ENV NEO4J_dbms_memory_heap_maxSize=1G
 ENV NEO4J_dbms_memory_heap_initial__size=100M
+ENV NEO4J_dbms_read__only=true
 
 RUN mkdir -p /opt/VFB/backup
 
