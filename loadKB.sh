@@ -19,5 +19,5 @@ if [ -d /backup/KBW-RESTORE.db ]; then
   /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true
 fi
 echo "set read only = ${NEOREADONLY} then launch neo4j service"
-sed -i s/read_only=false/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
+sed -i s/read_only=.*/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
 exec /docker-entrypoint.sh neo4j
