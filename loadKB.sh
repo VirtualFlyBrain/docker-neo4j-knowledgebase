@@ -8,7 +8,7 @@ if [ ! -d /data/databases/graph.db ]; then
     wget http://data.virtualflybrain.org/archive/VFB-KB.tar.gz 
     tar -xzvf VFB-KB.tar.gz
     mkdir -p /backup/KBW-RESTORE.db/
-    find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/KBW-RESTORE.db/ +
+    find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/ +
     rm -rf /opt/VFB/backup/*
     cd -
   fi
