@@ -5,7 +5,7 @@ if [ ! -d /data/databases/graph.db ]; then
     echo 'Resore KB from archive backup'
     cd /opt/VFB/backup/
     rm /opt/VFB/backup/VFB-KB.tar.gz
-    wget http://data.virtualflybrain.org/archive/VFB-KB.tar.gz 
+    wget http://data.virtualflybrain.org/archive/VFB-KB.tar.gz
     tar -xzvf VFB-KB.tar.gz
     mkdir -p /backup/KBW-RESTORE.db/
     find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/ +
@@ -20,6 +20,9 @@ if [ -d /backup/KBW-RESTORE.db ]; then
 fi
 echo "set read only = ${NEOREADONLY} then launch neo4j service"
 sed -i s/read_only=.*/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
+
+echo 'Allow new neo4j2owl plugin to make changes..'
+echo 'dbms.security.procedures.unrestricted=ebi.spot.neo4j2owl.*,apoc.*' >> ${NEOSERCONF}
 
 echo -e '\nSTARTING VFB KB SERVER\n' >> /var/lib/neo4j/logs/query.log
 
