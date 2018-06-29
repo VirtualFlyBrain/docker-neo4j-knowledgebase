@@ -1,4 +1,4 @@
-FROM virtualflybrain/docker-vfb-neo4j:enterprise 
+FROM virtualflybrain/docker-vfb-neo4j:enterprise
 
 ENV NEOREADONLY=true
 
@@ -11,6 +11,8 @@ RUN mkdir -p /opt/VFB/backup
 RUN apk update && apk add tar gzip curl wget
 
 COPY loadKB.sh /opt/VFB/
+RUN wget https://github.com/VirtualFlyBrain/neo4j2owl/releases/download/1.1.1-PRE/neo4j2owl-1.1.1.jar /var/lib/neo4j/plugins
+
 
 RUN chmod +x /opt/VFB/loadKB.sh
 
