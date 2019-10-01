@@ -3,7 +3,7 @@ services:
   
 script:
   - docker build -t test-image:test .
-  - docker run -d --name test -v ./data:/data -v ./backup:/backup -p 7474:7474 -p 7473:7473 -p 7687:7687 test-image:test
+  - docker run -d --name test -v data:/data -v backup:/backup -p 7474:7474 -p 7473:7473 -p 7687:7687 test-image:test
   - sleep 2m
   - curl -sSf http://localhost:7474/browser/
   - docker restart test
