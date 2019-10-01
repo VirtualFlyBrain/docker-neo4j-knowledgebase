@@ -12,12 +12,12 @@ if [ ! -d /data/databases/graph.db ]; then
     rm -rf /opt/VFB/backup/*
     cd -
   fi
+  if [ -d /backup/KBW-RESTORE.db ]; then
+    echo 'Resore KB from given backup'
+    /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true
+  fi
 fi
 
-if [ -d /backup/KBW-RESTORE.db ]; then
-  echo 'Resore KB from given backup'
-  /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true
-fi
 echo "set read only = ${NEOREADONLY} then launch neo4j service"
 sed -i s/read_only=.*/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
 
