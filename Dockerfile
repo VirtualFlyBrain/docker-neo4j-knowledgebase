@@ -11,7 +11,7 @@ RUN mkdir -p /opt/VFB/backup
 RUN apk update && apk add tar gzip curl wget
 
 COPY loadKB.sh /opt/VFB/
-RUN wget -P /var/lib/neo4j/plugins https://github.com/VirtualFlyBrain/neo4j2owl/raw/master/archive/neo4j2owl-1.20.jar 
+ADD neo4j2owl.jar /var/lib/neo4j/plugins/neo4j2owl.jar 
 
 
 RUN chmod +x /opt/VFB/loadKB.sh
