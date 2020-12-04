@@ -1,0 +1,31 @@
+version: '3.3'
+
+services:
+  vfb-kb:
+    image: virtualflybrain/docker-neo4j-knowledgebase:neo2owl
+    environment:
+      - NEO4J_AUTH=neo4j/neo
+      - NEO4J_dbms_read__only=false
+      - NEO4J_dbms_memory_heap_maxSize=6G
+      - NEO4J_dbms_memory_heap_initial__size=1G 
+    ports:
+      - 7474:7474
+      - 7687:7687
+  vfb-kb2kb:
+    image: matentzn/vfb-pipeline-kb2kb:latest
+    depends_on:
+      - vfb-kb
+    links:
+      - vfb-kb
+    environment:
+      - KBpassword=neo4j/neo
+      - KBserver=http://vfb-kb:7474
+  vfb-validatekb:
+    image: matentzn/vfb-pipeline-validatekb:latest
+    depends_on:
+      - vfb-kb2kb
+    links:
+      - vfb-kb
+    environment:
+      - KBpassword=neo4j/neo
+      - KBserver=http://vfb-kb:7474
