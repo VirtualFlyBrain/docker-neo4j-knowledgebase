@@ -1,11 +1,15 @@
 #!/bin/sh
 
+## get remote configs
+echo "Sourcing remote config"
+source ${CONF_DIR}/config.env
+
 if [ ! -d /data/databases/graph.db ]; then
   if [ ! -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from archive backup'
     cd /opt/VFB/backup/
     rm /opt/VFB/backup/VFB-KB.tar.gz
-    wget http://data.virtualflybrain.org/archive/VFB-KB.tar.gz 
+    wget ${KB_DATA}
     tar -xzvf VFB-KB.tar.gz
     mkdir -p /backup/KBW-RESTORE.db/
     find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/ +
