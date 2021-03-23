@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 ## get remote configs
 echo "Sourcing remote config"
@@ -8,22 +8,32 @@ if [ ! -d /data/databases/graph.db ]; then
   if [ ! -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from archive backup'
     cd /opt/VFB/backup/
-    rm /opt/VFB/backup/VFB-KB.tar.gz
+    rm /opt/VFB/backup/VFB-KB-4-2.tar.gz
     wget ${KB_DATA}
     tar -xzvf VFB-KB.tar.gz
-    mkdir -p /backup/KBW-RESTORE.db/
-    find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/ +
+    rm -rf /var/lib/neo4j/data/*
+    cp -r databases /var/lib/neo4j/data/
+    cp -r dbms /var/lib/neo4j/data/
+
     rm -rf /opt/VFB/backup/*
     cd -
   fi
-  if [ -d /backup/KBW-RESTORE.db ]; then
-    echo 'Resore KB from given backup'
-    /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true
-  fi
+  # if [ -d /backup/KBW-RESTORE.db ]; then
+  #   echo 'Resore KB from given backup'
+  #   # /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --database=neo4j --force
+  #   rm -r /var/lib/neo4j/data/.
+  #   cp -r /backup/KBW-RESTORE.db/databases /var/lib/neo4j/data/
+  #   cp -r /backup/KBW-RESTORE.db/dbms /var/lib/neo4j/data/
+  #   # /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true
+  #   echo 'Restore complete'
+  # fi
 fi
 
 echo "set read only = ${NEOREADONLY} then launch neo4j service"
 sed -i s/read_only=.*/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
+
+echo 'Allow new neo4j2owl plugin to make changes..'
+echo 'dbms.security.procedures.unrestricted=ebi.spot.neo4j2owl.*,apoc.*' >> ${NEOSERCONF}
 
 echo -e '\nSTARTING VFB KB SERVER\n' >> /var/lib/neo4j/logs/query.log
 
