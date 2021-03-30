@@ -1,4 +1,4 @@
-FROM virtualflybrain/docker-vfb-neo4j:4.2-enterprise
+FROM virtualflybrain/docker-vfb-neo4j:3.5-enterprise
 
 # from compose args
 ARG CONF_REPO
