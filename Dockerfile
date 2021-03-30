@@ -1,8 +1,8 @@
 FROM virtualflybrain/docker-vfb-neo4j:3.5-enterprise
 
 # from compose args
-ARG CONF_REPO
-ARG CONF_BRANCH
+ARG CONF_REPO = https://github.com/VirtualFlyBrain/vfb-pipeline-config.git
+ARG CONF_BRANCH = dev
 
 VOLUME /data_transfer
 
