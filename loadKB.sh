@@ -10,7 +10,7 @@ if [ ! -d /data/databases/graph.db ]; then
     cd /opt/VFB/backup/
     rm /opt/VFB/backup/VFB-KB-4-2.tar.gz
     wget ${KB_DATA}
-    tar -xzvf VFB-KB-4-2.tar.gz
+    tar -xzvf *.tar.gz
     rm -rf /var/lib/neo4j/data/*
     cp -r databases /var/lib/neo4j/data/
     cp -r dbms /var/lib/neo4j/data/
