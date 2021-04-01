@@ -1,4 +1,4 @@
-FROM virtualflybrain/docker-vfb-neo4j:3.5-enterprise
+FROM virtualflybrain/docker-vfb-neo4j:4.5-enterprise
 
 # from compose args
 ARG CONF_REPO=https://github.com/VirtualFlyBrain/vfb-pipeline-config.git
