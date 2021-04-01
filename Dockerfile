@@ -46,6 +46,4 @@ RUN wget $APOC_JAR -O /var/lib/neo4j/plugins/apoc.jar
 COPY loadKB.sh /opt/VFB/
 RUN chmod +x /opt/VFB/loadKB.sh
 
-ADD neo4j2owl.jar /var/lib/neo4j/plugins/neo4j2owl.jar
-
 ENTRYPOINT ["/opt/VFB/loadKB.sh"]
