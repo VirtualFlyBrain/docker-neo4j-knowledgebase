@@ -7,8 +7,6 @@ source ${CONF_DIR}/config.env
 echo "set read only = ${NEOREADONLY} then launch neo4j service"
 sed -i s/read_only=.*/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
 
-echo 'Allow new neo4j2owl plugin to make changes..'
-echo 'dbms.security.procedures.unrestricted=ebi.spot.neo4j2owl.*,apoc.*' >> ${NEOSERCONF}
 
 echo -e '\nSTARTING VFB KB SERVER\n' >> /var/lib/neo4j/logs/query.log
 
