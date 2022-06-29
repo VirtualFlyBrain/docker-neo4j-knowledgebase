@@ -14,10 +14,7 @@ if [ ! -d /data/databases/neo4j ]; then
     rm -rf /opt/VFB/backup/VFB-KB-4-2.tar.gz
     wget $KB_DATA 
     tar -xzvf VFB-KB-4-2.tar.gz
-    mkdir -p /backup/KBW-RESTORE.db/
-    find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/ +
-    rm -rf /opt/VFB/backup/*
-    cd -
+    mv -r KBW-RESTORE.db /backup/ 
   fi
   if [ -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from given backup'
