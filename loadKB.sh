@@ -15,7 +15,7 @@ if [ ! -d /data/databases/neo4j ]; then
     wget $KB_DATA 
     tar -xzvf VFB-KB-4-2.tar.gz
     mkdir -P /backup/
-    mv KBW-RESTORE.db /backup/KBW-RESTORE.db 
+    mv KBW-RESTORE.db /backup/
   fi
   if [ -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from given backup'
