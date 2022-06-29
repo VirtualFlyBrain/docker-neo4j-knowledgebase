@@ -4,6 +4,8 @@ FROM virtualflybrain/docker-vfb-neo4j:4.2-enterprise
 ARG CONF_REPO=https://github.com/VirtualFlyBrain/vfb-pipeline-config.git
 ARG CONF_BRANCH=dev
 
+ENV dbms.default_listen_address=0.0.0.0
+
 VOLUME /data_transfer
 
 ENV CONF_BASE=/opt/conf_base
