@@ -21,7 +21,7 @@ if [ ! -d /data/databases/neo4j ]; then
   fi
   if [ -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from given backup'
-    /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true --database=neo4j
+    /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force --database=neo4j
   fi
 fi
 
