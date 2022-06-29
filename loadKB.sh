@@ -7,6 +7,23 @@ source ${CONF_DIR}/config.env
 echo "set read only = ${NEOREADONLY} then launch neo4j service"
 sed -i s/read_only=.*/read_only=${NEOREADONLY}/ ${NEOSERCONF} && \
 
+if [ ! -d /data/databases/neo4j ]; then
+  if [ ! -d /backup/KBW-RESTORE.db ]; then
+    echo 'Resore KB from archive backup'
+    cd /opt/VFB/backup/
+    rm -rf /opt/VFB/backup/VFB-KB-4-2.tar.gz
+    wget $KB_DATA 
+    tar -xzvf VFB-KB-4-2.tar.gz
+    mkdir -p /backup/KBW-RESTORE.db/
+    find /opt/VFB/backup/ -name 'KBW-RESTORE.db' -exec cp -vr "{}" /backup/ +
+    rm -rf /opt/VFB/backup/*
+    cd -
+  fi
+  if [ -d /backup/KBW-RESTORE.db ]; then
+    echo 'Resore KB from given backup'
+    /var/lib/neo4j/bin/neo4j-admin restore --from=/backup/KBW-RESTORE.db --force=true --database=neo4j
+  fi
+fi
 
 echo -e '\nSTARTING VFB KB SERVER\n' >> /var/lib/neo4j/logs/query.log
 
