@@ -4,7 +4,7 @@ if [ ! -d /data/databases/graph.db ]; then
   if [ ! -d /backup/KBW-RESTORE.db ]; then
     echo 'Resore KB from archive backup'
     cd /opt/VFB/backup/
-    rm /opt/VFB/backup/VFB-KB.tar.gz
+    rm /opt/VFB/backup/VFB-KB2.tar.gz
     wget http://data.virtualflybrain.org/archive/VFB-KB2.tar.gz 
     tar -xzvf VFB-KB.tar.gz
     mkdir -p /backup/KBW-RESTORE.db/
